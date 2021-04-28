@@ -1,4 +1,6 @@
-import {LitElement} from 'lit';
+// uncomment to make things work
+//import 'https://unpkg.com/@open-wc/scoped-elements@2.0.0-next.0/src/loadPolyfill.js';
+import {LitElement, html} from 'lit';
 import {ScopedElementsMixin} from '@open-wc/scoped-elements';
 
 class DbpCommonDemo extends ScopedElementsMixin(LitElement) {
@@ -8,7 +10,6 @@ class DbpCommonDemo extends ScopedElementsMixin(LitElement) {
 
     static get scopedElements() {
         return {
-            //'something-different': customElements.get('something-different'),
         };
     }
 
