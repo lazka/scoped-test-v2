@@ -1,17 +1,16 @@
 import {LitElement, html} from 'lit';
 import {ScopedElementsMixin} from '@open-wc/scoped-elements';
 
-class Internal extends ScopedElementsMixin(LitElement) {
-    constructor() {
-        super();
-    }
-
+class SomethingDifferent extends LitElement
+{
     render() {
-        return html`world`;
+        return html`works!`;
     }
 }
 
-class DbpCommonDemo extends ScopedElementsMixin(LitElement) {
+customElements.define('something-different', SomethingDifferent);
+
+class Demo extends ScopedElementsMixin(LitElement) {
     constructor() {
         super();
     }
@@ -20,20 +19,13 @@ class DbpCommonDemo extends ScopedElementsMixin(LitElement) {
         super.connectedCallback();
 
         this.updateComplete.then(() => {
-            let internal = this.shadowRoot.querySelector(this.getScopedTagName('something-internal'));
-            internal.setAttribute('style', "font-size: 1.5em");
+            this.defineScopedElement('something-different', SomethingDifferent);
         });
     }
 
-    static get scopedElements() {
-        return {
-            'something-internal': Internal,
-        };
-    }
-
     render() {
-        return html`hello <something-internal></something-internal>`;
+        return html`This should say works: <something-different></something-different>`;
     }
 }
 
-customElements.define('dbp-common-demo', DbpCommonDemo);
+customElements.define('some-demo', Demo);
