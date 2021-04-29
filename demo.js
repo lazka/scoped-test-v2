@@ -1,5 +1,3 @@
-// uncomment to make things work
-// import 'https://unpkg.com/@open-wc/scoped-elements@2.0.0-next.0/src/loadPolyfill.js';
 import {LitElement, html} from 'lit';
 import {ScopedElementsMixin} from '@open-wc/scoped-elements';
 
@@ -16,6 +14,15 @@ class Internal extends ScopedElementsMixin(LitElement) {
 class DbpCommonDemo extends ScopedElementsMixin(LitElement) {
     constructor() {
         super();
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+
+        this.updateComplete.then(() => {
+            let internal = this.shadowRoot.querySelector(this.getScopedTagName('something-internal'));
+            internal.setAttribute('style', "font-size: 1.5em");
+        });
     }
 
     static get scopedElements() {
